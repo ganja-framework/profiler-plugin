@@ -16,13 +16,13 @@ class ProfilerPluginSpec extends Specification {
         def subject = new ProfilerPlugin()
 
         and:
-        2 * container.register(_,_) >> definition
+        4 * container.register(_,_) >> definition
 
         when:
         subject.registerServices(container)
 
         then:
-        1 * definition.setArguments(_)
+        2 * definition.setArguments(_)
     }
 
     void "it can register listeners to dispatcher"() {

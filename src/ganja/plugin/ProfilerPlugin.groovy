@@ -16,6 +16,16 @@ class ProfilerPlugin {
 
         container
             .register('profiler', 'ganja.plugin.profiler.Profiler')
+            .setArguments([
+                storage: new Reference('profiler.storage'),
+                collectors: [ new Reference('dummy.collector') ]
+            ])
+
+        container
+            .register('profiler.storage', 'ganja.plugin.profiler.storage.ListStorage')
+
+        container
+            .register('dummy.collector', 'ganja.plugin.profiler.collector.DummyCollector')
     }
 
     void registerListeners(Container container) {
