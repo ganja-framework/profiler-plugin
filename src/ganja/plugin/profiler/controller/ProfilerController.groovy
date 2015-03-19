@@ -23,7 +23,7 @@ class ProfilerController {
 
         for(profile in storage.getAll()) {
             logger?.info(profile)
-            params += "<li>${profile.token}</li>"
+            params += "<li>${profile.getToken()}</li>"
         }
 
         response.setContent("<h1>Profiles</h1><ul>${params}</ul>")
@@ -39,7 +39,7 @@ class ProfilerController {
 
         if(profile) {
             def response = new Response()
-            response.setContent("<h1>Profile ${profile.token}</h1>")
+            response.setContent("<h1>Profile ${profile.getToken()}</h1>")
 
             return response
         }

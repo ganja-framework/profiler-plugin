@@ -11,7 +11,9 @@ class Profiler {
 
     void collect(def request, def response = null, Exception exception = null) {
 
-        def profile = new Profile(token: RandomStringUtils.random(6, true, true))
+        def profile = new Profile()
+
+        profile.setToken(RandomStringUtils.random(6, true, true))
 
         collectors.each({ DataCollectorInterface collector ->
             profile.put(collector.name, collector.collect(request, response, exception))
