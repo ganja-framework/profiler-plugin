@@ -1,14 +1,15 @@
 package ganja.plugin
 
-import ganja.component.di.Container
+import ganja.common.di.ContainerInterface
+import ganja.common.plugin.PluginInterface
 import ganja.component.di.Reference
 import ganja.component.event.DispatcherInterface
 import ganja.component.http.event.EngineEvents
 import ganja.plugin.profiler.listener.ProfilerListener
 
-class ProfilerPlugin {
+class ProfilerPlugin implements PluginInterface {
 
-    void registerServices(Container container) {
+    void registerServices(ContainerInterface container) {
 
         container
             .register('profiler.listener', 'ganja.plugin.profiler.listener.ProfilerListener')
@@ -27,7 +28,7 @@ class ProfilerPlugin {
             .register('dummy.collector', 'ganja.plugin.profiler.collector.DummyCollector')
     }
 
-    void registerListeners(Container container) {
+    void registerListeners(ContainerInterface container) {
 
         DispatcherInterface dispatcher = container.get('dispatcher')
 

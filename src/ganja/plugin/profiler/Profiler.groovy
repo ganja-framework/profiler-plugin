@@ -8,7 +8,7 @@ class Profiler {
     ProfilerStorageInterface storage
     List<DataCollectorInterface> collectors = []
 
-    void collect(def request, def response, Exception exception) {
+    void collect(def request, def response = null, Exception exception = null) {
 
         // create and save profile
         def profile = new Profile()
@@ -18,13 +18,5 @@ class Profiler {
         })
 
         storage.save(profile)
-    }
-
-    void collect(def request, def response) {
-        collect(request, response, null)
-    }
-
-    void collect(def request) {
-        collect(request, null)
     }
 }

@@ -38,8 +38,9 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.1'
-    compile 'ganja.component:event:0.1.26'
     compile 'org.slf4j:slf4j-api:1.7.7'
+    compile 'ganja:common:0.1.1'
+    compile 'ganja.component:event:0.1.26'
     compile 'ganja.component:di:0.1.24'
     compile 'ganja.component:event:0.1.11'
     compile 'ganja.component:http:0.1.48'

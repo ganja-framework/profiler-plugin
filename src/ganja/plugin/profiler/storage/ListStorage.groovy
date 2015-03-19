@@ -15,4 +15,16 @@ class ListStorage implements ProfilerStorageInterface {
 
         data.add(profile)
     }
+
+    @Override
+    Profile get(String token) {
+
+        data.get(token)
+    }
+
+    @Override
+    List<Profile> getAll() {
+
+        data
+    }
 }

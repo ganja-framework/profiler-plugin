@@ -1,5 +1,6 @@
 package ganja.plugin
 
+import ganja.common.di.ContainerInterface
 import ganja.component.di.Container
 import ganja.component.di.Definition
 import ganja.component.event.Dispatcher
@@ -13,7 +14,7 @@ class ProfilerPluginSpec extends Specification {
     void "it can register services in the container"() {
 
         given:
-        Container container = GroovyMock()
+        ContainerInterface container = GroovyMock()
         Definition definition = GroovyMock()
         def subject = new ProfilerPlugin()
 
@@ -30,7 +31,7 @@ class ProfilerPluginSpec extends Specification {
     void "it can register listeners to dispatcher"() {
 
         given:
-        Container container = GroovyMock()
+        ContainerInterface container = GroovyMock()
         Dispatcher dispatcher = GroovyMock()
         ProfilerListener listener = GroovyMock()
         Profiler profiler = GroovyMock()

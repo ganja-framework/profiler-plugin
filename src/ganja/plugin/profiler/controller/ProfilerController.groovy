@@ -1,0 +1,45 @@
+package ganja.plugin.profiler.controller
+
+import ganja.common.http.exception.NotFoundException
+import ganja.component.http.Request
+import ganja.component.http.Response
+import ganja.plugin.profiler.Profile
+import ganja.plugin.profiler.storage.ProfilerStorageInterface
+
+class ProfilerController {
+
+    def logger
+    ProfilerStorageInterface storage
+
+    def list(Request request) {
+
+        logger?.info('more action')
+
+        def response = new Response()
+        String params = ''
+
+        storage.getAll().each({ Profile profile ->
+            params += "<li>${profile.token}</li>"
+        })
+
+        response.setContent("<h1>Profiles</h1><ul>${params}</ul>")
+
+        response
+    }
+
+    Response show(Request request) {
+
+        String token = request.getParameter('token')
+
+        def profile = storage.get(token)
+
+        if(profile) {
+            def response = new Response()
+            response.setContent("<h1>Profile ${profile.token}</h1>")
+
+            return response
+        }
+
+        throw new NotFoundException("Profile with token: ${token} not found")
+    }
+}
