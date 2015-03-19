@@ -6,7 +6,7 @@ import ganja.plugin.profiler.storage.ProfilerStorageInterface
 class Profiler {
 
     ProfilerStorageInterface storage
-    List<DataCollectorInterface> collectors
+    List<DataCollectorInterface> collectors = []
 
     void collect(def request, def response, Exception exception) {
 
