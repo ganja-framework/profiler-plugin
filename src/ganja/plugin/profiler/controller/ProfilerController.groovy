@@ -13,14 +13,18 @@ class ProfilerController {
 
     def list(Request request) {
 
-        logger?.info('more action')
+        logger?.info('profiler:list action')
+
 
         def response = new Response()
         String params = ''
 
-        storage.getAll().each({ Profile profile ->
+        logger?.info("Storage size: ${storage.size()}")
+
+        for(profile in storage.getAll()) {
+            logger?.info(profile)
             params += "<li>${profile.token}</li>"
-        })
+        }
 
         response.setContent("<h1>Profiles</h1><ul>${params}</ul>")
 
