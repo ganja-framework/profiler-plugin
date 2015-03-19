@@ -19,7 +19,11 @@ class ListStorage implements ProfilerStorageInterface {
     @Override
     Profile get(String token) {
 
-        data.get(token)
+        for(profile in data) {
+            if(profile.getToken() == token) {
+                return profile
+            }
+        }
     }
 
     @Override

@@ -11,7 +11,6 @@ class Profiler {
 
     void collect(def request, def response = null, Exception exception = null) {
 
-        // create and save profile
         def profile = new Profile(token: RandomStringUtils.random(6, true, true))
 
         collectors.each({ DataCollectorInterface collector ->
