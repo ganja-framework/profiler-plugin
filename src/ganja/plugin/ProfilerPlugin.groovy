@@ -17,8 +17,7 @@ class ProfilerPlugin {
         container
             .register('profiler', 'ganja.plugin.profiler.Profiler')
             .setArguments([
-                storage: new Reference('profiler.storage'),
-                collectors: [ new Reference('dummy.collector') ]
+                storage: new Reference('profiler.storage')
             ])
 
         container
@@ -33,6 +32,7 @@ class ProfilerPlugin {
         DispatcherInterface dispatcher = container.get('dispatcher')
 
         ProfilerListener profilerListener = container.get('profiler.listener')
+        profilerListener.getProfiler().getCollectors().add(container.get('dummy.collector'))
         dispatcher.addListener(EngineEvents.RESPONSE, profilerListener.&onResponse)
     }
 }

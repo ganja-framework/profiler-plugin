@@ -3,6 +3,8 @@ package ganja.plugin
 import ganja.component.di.Container
 import ganja.component.di.Definition
 import ganja.component.event.Dispatcher
+import ganja.plugin.profiler.Profiler
+import ganja.plugin.profiler.collector.DataCollectorInterface
 import ganja.plugin.profiler.listener.ProfilerListener
 import spock.lang.Specification
 
@@ -31,11 +33,16 @@ class ProfilerPluginSpec extends Specification {
         Container container = GroovyMock()
         Dispatcher dispatcher = GroovyMock()
         ProfilerListener listener = GroovyMock()
+        Profiler profiler = GroovyMock()
+        DataCollectorInterface collector = GroovyMock()
         def subject = new ProfilerPlugin()
 
         and:
         1 * container.get('dispatcher') >> dispatcher
         1 * container.get('profiler.listener') >> listener
+        1 * listener.getProfiler() >> profiler
+        1 * profiler.getCollectors() >> []
+        1 * container.get('dummy.collector') >> collector
 
         when:
         subject.registerListeners(container)
