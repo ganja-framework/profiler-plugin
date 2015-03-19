@@ -6,6 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils
 
 class Profiler {
 
+    def logger
     ProfilerStorageInterface storage
     List<DataCollectorInterface> collectors = []
 
@@ -14,6 +15,8 @@ class Profiler {
         def profile = new Profile()
 
         profile.setToken(RandomStringUtils.random(6, true, true))
+
+        logger?.debug("Creating profile with token ${profile.getToken()}")
 
         collectors.each({ DataCollectorInterface collector ->
             profile.put(collector.name, collector.collect(request, response, exception))
