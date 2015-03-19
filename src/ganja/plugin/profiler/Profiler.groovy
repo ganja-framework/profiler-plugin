@@ -2,6 +2,7 @@ package ganja.plugin.profiler
 
 import ganja.plugin.profiler.collector.DataCollectorInterface
 import ganja.plugin.profiler.storage.ProfilerStorageInterface
+import org.apache.commons.lang3.RandomStringUtils
 
 class Profiler {
 
@@ -11,7 +12,7 @@ class Profiler {
     void collect(def request, def response = null, Exception exception = null) {
 
         // create and save profile
-        def profile = new Profile()
+        def profile = new Profile(token: RandomStringUtils.random(6, true, true))
 
         collectors.each({ DataCollectorInterface collector ->
             profile.put(collector.name, collector.collect(request, response, exception))

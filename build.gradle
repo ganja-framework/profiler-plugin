@@ -46,6 +46,7 @@ dependencies {
     compile 'ganja.component:http:0.1.48'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile 'cglib:cglib-nodep:2.2.2'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
 }
 
 if (!hasProperty('sonatypeUsername')) {
