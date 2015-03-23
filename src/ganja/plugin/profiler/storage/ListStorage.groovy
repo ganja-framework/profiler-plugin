@@ -5,7 +5,7 @@ import ganja.plugin.profiler.Profile
 class ListStorage implements ProfilerStorageInterface {
 
     def logger
-    @Delegate List<Profile> data = []
+    List<Profile> data = []
 
     @Override
     void save(Profile profile) {
@@ -33,5 +33,11 @@ class ListStorage implements ProfilerStorageInterface {
     List<Profile> getAll() {
 
         data
+    }
+
+    @Override
+    Integer size() {
+
+        data.size()
     }
 }

@@ -9,4 +9,6 @@ interface ProfilerStorageInterface {
     Profile get(String token)
 
     List<Profile> getAll()
+
+    Integer size()
 }
