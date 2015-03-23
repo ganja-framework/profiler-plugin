@@ -22,7 +22,7 @@ class ProfilerController {
         logger?.info("Storage size: ${storage.size()}")
 
         for(profile in storage.getAll()) {
-            logger?.info(profile)
+            logger?.info(profile.getToken())
             params += "<li>${profile.getToken()}</li>"
         }
 
