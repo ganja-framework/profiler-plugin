@@ -24,7 +24,7 @@ class ProfilerSpec extends Specification {
         subject.collect(request, response, exception)
 
         then:
-        3 * collector.name
+        6 * collector.name
         1 * collector.collect(request, null, null)
         1 * collector.collect(request, response, null)
         1 * collector.collect(request, response, exception)
