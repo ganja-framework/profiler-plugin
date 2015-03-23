@@ -16,9 +16,10 @@ class Profiler {
 
         profile.setToken(RandomStringUtils.random(6, true, true))
 
-        logger?.debug("Creating profile with token ${profile.getToken()}")
+        logger?.info("Creating profile with token ${profile.getToken()}")
 
         collectors.each({ DataCollectorInterface collector ->
+            logger.info("Calling collector ${collector.name}")
             profile.put(collector.name, collector.collect(request, response, exception))
         })
 
