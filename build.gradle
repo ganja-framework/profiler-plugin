@@ -6,13 +6,16 @@ apply plugin: 'idea'
 sourceSets {
     main {
         groovy {
-            srcDirs = ['src']
+            srcDirs 'src'
+        }
+        resources {
+            srcDir 'resources'
         }
     }
 
     test {
         groovy {
-            srcDirs = ['test']
+            srcDirs 'test'
         }
     }
 }
