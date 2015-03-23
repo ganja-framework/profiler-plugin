@@ -10,7 +10,7 @@ class ListStorage implements ProfilerStorageInterface {
     void save(Profile profile) {
 
         if(data.size() > 9) {
-            data.pop()
+            data.remove(0)
         }
 
         data.add(profile)
