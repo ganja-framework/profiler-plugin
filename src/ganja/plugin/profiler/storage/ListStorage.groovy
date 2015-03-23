@@ -4,6 +4,7 @@ import ganja.plugin.profiler.Profile
 
 class ListStorage implements ProfilerStorageInterface {
 
+    def logger
     @Delegate List<Profile> data = []
 
     @Override
@@ -13,7 +14,9 @@ class ListStorage implements ProfilerStorageInterface {
             data.remove(0)
         }
 
+        logger?.info("Adding new profile ${profile.getToken()}")
         data.add(profile)
+        logger?.info("Current storage size: ${data.size()}")
     }
 
     @Override
