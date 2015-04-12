@@ -6,7 +6,7 @@ parameters:
 
     dummy.collector.class: ganja.plugin.profiler.collector.DummyCollector
 
-    profiler.controller.class: ganja.plugin.profiler.controller.ProfilerController
+    controller.profiler.class: ganja.plugin.profiler.controller.ProfilerController
 
 services:
 
@@ -26,6 +26,6 @@ services:
     dummy.collector:
         class: dummy.collector.class
 
-    profiler.controller:
-        class: profiler.controller.class
+    controller.profiler:
+        class: controller.profiler.class
         arguments: { storage: $profiler.storage }
