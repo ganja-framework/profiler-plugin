@@ -12,14 +12,14 @@ services:
 
     profiler:
         class: profiler.class
-        arguments: [ storage: $profiler.storage ]
+        arguments: { storage: $profiler.storage }
 
     profiler.storage:
         class: profiler.storage.class
 
     profiler.listener:
         class: profiler.listener.class
-        arguments: [ profiler: $profiler ]
+        arguments: { profiler: $profiler }
         tags:
             - { name 'listener', event: 'event.response', method: 'onResponse' }
 
@@ -28,4 +28,4 @@ services:
 
     profiler.controller:
         class: profiler.controller.class
-        arguments: [ storage: $profiler.storage ]
+        arguments: { storage: $profiler.storage }
