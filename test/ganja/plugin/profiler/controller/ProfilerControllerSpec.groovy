@@ -1,7 +1,8 @@
 package ganja.plugin.profiler.controller
 
+import ganja.common.http.ResponseInterface
+import ganja.common.view.TemplateEngineInterface
 import ganja.component.http.Request
-import ganja.component.http.Response
 import ganja.plugin.profiler.Profile
 import ganja.plugin.profiler.storage.ProfilerStorageInterface
 import spock.lang.Specification
@@ -13,10 +14,16 @@ class ProfilerControllerSpec extends Specification {
         given:
         Request request = GroovyMock()
         ProfilerStorageInterface storage = GroovyMock()
-        def subject = new ProfilerController(storage: storage)
+        TemplateEngineInterface engine = GroovyMock()
+        ResponseInterface response = GroovyMock()
 
-        expect:
-        subject.list(request) instanceof Response
+        def subject = new ProfilerController(storage: storage, engine: engine)
+
+        when:
+        subject.list(request)
+
+        then:
+        1 * engine.render(_,_) >> response
     }
 
     void "it can show individual profile"() {
@@ -24,15 +31,20 @@ class ProfilerControllerSpec extends Specification {
         given:
         Request request = GroovyMock()
         ProfilerStorageInterface storage = GroovyMock()
+        TemplateEngineInterface engine = GroovyMock()
+        ResponseInterface response = GroovyMock()
         Profile profile = GroovyMock() { asBoolean() >> true }
-        def subject = new ProfilerController(storage: storage)
+
+        def subject = new ProfilerController(storage: storage, engine: engine)
 
         and:
-        1 * storage.get('ok') >> profile
-        1 * profile.getToken() >> 'ok'
-        1 * request.getParameter('token') >> 'ok'
+        1 * storage.get(_) >> profile
+        1 * request.getParameter('token')
 
-        expect:
-        subject.show(request) instanceof Response
+        when:
+        subject.show(request)
+
+        then:
+        1 * engine.render(_,_) >> response
     }
 }

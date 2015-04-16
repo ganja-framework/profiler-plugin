@@ -1,23 +1,45 @@
 package ganja.plugin
 
+import ganja.common.di.ContainerInterface
+import ganja.common.di.DefinitionInterface
+import ganja.common.plugin.PluginInterface
 import spock.lang.Specification
 
 class ProfilerPluginSpec extends Specification {
 
-//    void "it can register services in the container"() {
-//
-//        given:
-//        ContainerInterface container = GroovyMock()
-//        Definition definition = GroovyMock()
-//        def subject = new ProfilerPlugin()
-//
-//        and:
-//        4 * container.register(_,_) >> definition
-//
-//        when:
-//        subject.registerServices(container)
-//
-//        then:
-//        2 * definition.setArguments(_)
-//    }
+    void "it know which template engine it supports"() {
+
+        given:
+        def subject = new ProfilerPlugin()
+
+        expect:
+        subject.supports('jtwig')
+        ! subject.supports('thymeleaf')
+        ! subject.supports('handlebars')
+    }
+
+    void "it is initializable"() {
+
+        given:
+        def subject = new ProfilerPlugin()
+
+        expect:
+        subject instanceof ProfilerPlugin
+        subject instanceof PluginInterface
+    }
+
+    void "it can register services"() {
+
+        given:
+        def subject = new ProfilerPlugin()
+        ContainerInterface container = Mock()
+        DefinitionInterface definition = Mock()
+
+        when:
+        subject.registerServices(container)
+
+        then:
+        (1.._) * container.register(_,_) >> definition
+        (1.._) * definition.setArguments(_)
+    }
 }

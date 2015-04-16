@@ -23,4 +23,9 @@ class ProfilerPlugin implements PluginInterface {
 
         parser.parse(fileLoader.load('/config/services.yml') as Map, container)
     }
+
+    @Override
+    Boolean supports(String viewEngine) {
+        return viewEngine == 'jtwig'
+    }
 }
